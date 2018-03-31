@@ -1,2 +1,2 @@
 # ARia
-It's like playing the piano but AR
+It's like playing the piano but guitAR
