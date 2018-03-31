@@ -1,0 +1,1 @@
+STREAM_FRAME_FILE = "images/bingbong.png"
