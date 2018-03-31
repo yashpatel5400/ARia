@@ -1,3 +1,10 @@
+"""
+__authors__     = Yash, Peter, Jeff, Robert
+__description__ = Post-processing step on the image frames before being sent
+to be displayed on the Oculus
+__name__ = postprocess.py
+"""
+
 import numpy as np
 import cv2
 
