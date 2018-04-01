@@ -2,8 +2,6 @@ import numpy as np
 import cv2
 
 def get_corners(frame):
-
-    color_img = cv2.imread(frame)
     imcopy = color_img.copy()
 
     # Convert BGR to HSV
