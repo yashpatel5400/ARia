@@ -21,9 +21,9 @@ def get_note_sequence(file):
 
     return note_sequence
 
-if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('usage: {} <midi file>'.format(sys.argv[0]))
-		
-    note_sequence = get_note_sequence(sys.argv[1])
+def test(fn):
+    note_sequence = get_note_sequence(fn)
     print(note_sequence)
+
+if __name__ == '__main__':
+    test("music/pirates.mid")
