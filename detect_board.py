@@ -1,6 +1,5 @@
 import numpy as np
 import cv2
-import sys
 
 def get_corners(frame):
 
@@ -35,12 +34,3 @@ def get_corners(frame):
     centers = [(int(m['m10']/m['m00']), int(m['m01']/m['m00'])) for m in moments if m['m00'] != 0]
     
     return centers
-
-def main(frame):
-    
-    centers = get_corners(frame)
-    print(centers)
-    
-if __name__ == '__main__':
-    frame = sys.argv[1]
-    main(frame)
