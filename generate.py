@@ -30,3 +30,4 @@ if __name__ == "__main__":
     generate_3d("images/drive.jpg")
     generate_3d("images/feet.jpg")
     generate_3d("images/drive.jpg")
+    generate_3d("images/waterski.jpg")
