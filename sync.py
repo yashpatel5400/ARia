@@ -20,4 +20,4 @@ def sync(terminate=None):
         cur_time += 1
 
 if __name__ == "__main__":
-    sync(terminate=3)
+    sync(terminate=None)
