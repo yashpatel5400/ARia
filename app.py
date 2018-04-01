@@ -21,9 +21,15 @@ def main(music_fn):
         input_fn  = "stream/{}.jpg".format(frame)
         output_fn = "output/{}.jpg".format(frame)
 
-        frame_img = cv2.imread(input_fn)
+        cur_time = time.time()
+        notes = note_times[int((cur_time - start_time) // c.TIME_DELTA)]
 
-        color_img = overlay_colors()
+        frame_img  = cv2.imread(input_fn)
+        key_to_box = get_board(frame_img)
+
+        contours = [key_to_box[note] for note in notes]
+        colors   = [[255,0,0]] * len(contours)
+        color_img = overlay_colors(frame_img, contours, colors)
         cv2.imwrite(output_fn, color_img)
         generate_3d(output_fn)
 
