@@ -16,7 +16,6 @@ def sync(terminate=None):
         if terminate is not None and cur_time > terminate:
             return
         subprocess.call(cmd)
-        time.sleep(1.0)
         cur_time += 1
 
 if __name__ == "__main__":
