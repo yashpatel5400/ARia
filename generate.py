@@ -8,7 +8,7 @@ import config as c
 from PIL import Image
 
 def generate_3d(img_fn):
-    output_fn = "{}_3d.jpg".format(img_fn.split(".jpg")[0])
+    output_fn = "output/result.jpg"
     left  = Image.open(img_fn)
     right = Image.open(img_fn)
 
