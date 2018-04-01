@@ -7,13 +7,15 @@ __name__ = app.py
 import cv2
 import time
 
+import config as c
 from generate import generate_3d
-from detect_board import get_corners
-from midi import note_times
+from detect_board import get_board
+from midi import get_note_times
 from postprocess import overlay_colors
 
 def main(music_fn):
     note_times = get_note_times(music_fn)
+    print(note_times)
     frame = 1
     start_time = time.time()
 
@@ -27,10 +29,14 @@ def main(music_fn):
         frame_img  = cv2.imread(input_fn)
         key_to_box = get_board(frame_img)
 
-        contours = [key_to_box[note] for note in notes]
-        colors   = [[255,0,0]] * len(contours)
-        color_img = overlay_colors(frame_img, contours, colors)
-        cv2.imwrite(output_fn, color_img)
+        if len(key_to_box.keys()) != 0:
+            contours = [key_to_box[note] for note in notes]
+            colors   = [[255,0,0]] * len(contours)
+            color_img = overlay_colors(frame_img, contours, colors)
+            cv2.imwrite(output_fn, color_img)
+        else:
+            cv2.imwrite(output_fn, frame_img)
+
         generate_3d(output_fn)
 
         frame += 1

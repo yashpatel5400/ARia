@@ -2,6 +2,9 @@ import numpy as np
 import cv2
 
 def rectify(h):
+    if h.shape[0] * h.shape[1] != 8:
+        return None
+
     h = h.reshape((4,2))
     hnew = np.zeros((4,2))
 
@@ -48,8 +51,10 @@ def get_corners(frame):
     centers = [(int(m['m10']/m['m00']), int(m['m01']/m['m00'])) for m in moments if m['m00'] != 0]
 
     centers = np.array(centers)
-    centers = rectify(centers)
+    if centers.shape == (0,):
+        return None
 
+    centers = rectify(centers)
     return centers
 
 def get_C_key(frame,corners):
@@ -81,9 +86,15 @@ def get_C_key(frame,corners):
     # TODO: Ensure the convex hull are a minimum area
 
     # approximate the contour with a quadrangle
+    if len(largest_convex_hulls) == 0:
+        return None
+
     peri = cv2.arcLength(largest_convex_hulls[0],True)
     approx = cv2.approxPolyDP(largest_convex_hulls[0],0.02*peri,True)
     approx = rectify(approx)
+
+    if approx is None:
+        return None
 
     # get midpoints of corners
     left_mdpt = [(corners[0,0]+corners[3,0])/2,(corners[0,1]+corners[3,1])/2]
@@ -148,6 +159,9 @@ def get_all_keys(frame,corners):
 
     # get the C key
     C_key_output = get_C_key(frame,corners)
+    if C_key_output is None:
+        return {}
+
     ckey = C_key_output[0]
     key_width = C_key_output[1]
     black_bot = C_key_output[2]
@@ -240,7 +254,9 @@ def get_all_keys(frame,corners):
 
 def get_board(frame):
 
-    corners = get_corners(image)
-    key_dict = get_all_keys(image,corners)
+    corners = get_corners(frame)
+    if corners is None:
+        return {}
 
+    key_dict = get_all_keys(frame,corners)
     return key_dict
