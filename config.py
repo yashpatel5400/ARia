@@ -5,3 +5,4 @@ __name__ = config.py
 """
 
 STREAM_FRAME_FILE = "images/bingbong.png"
+SCREEN_SIZE = (3840, 2160)
