@@ -1,3 +1,7 @@
+output/*.jpg
+stream/*.jpg
+music/*.mid
+
 *.pyc
 
 # any pretrained models
