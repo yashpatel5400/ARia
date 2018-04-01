@@ -32,7 +32,7 @@ def read_music(frame):
     # cv2.imshow("sup", gray)
 
 def overlay_colors(frame, contours, colors):
-    for i in xrange(0,len(contours)):
+    for i in range(0,len(contours)):
         cv2.drawContours(frame,contours,i,colors[i],-1)
     return frame
 
